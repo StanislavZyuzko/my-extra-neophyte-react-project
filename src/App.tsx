@@ -26,6 +26,7 @@ interface SquareProps {
   id: any;
   setCount: any;
   testCont: any;
+  count: any;
 }
 
 function Square(props: SquareProps) {
@@ -35,7 +36,6 @@ function Square(props: SquareProps) {
     e.stopPropagation();
     // if (!e.target.hidden) {
     // }
-    setCount(testCont);
 
     setGameSquers((prevState: any) =>
       prevState.map((elem: any) => {
@@ -46,6 +46,9 @@ function Square(props: SquareProps) {
         return elem;
       })
     );
+    setCount(testCont.length);
+
+
   };
 
   return (
@@ -58,7 +61,7 @@ function Square(props: SquareProps) {
 
 function App() {
   const [gameSquers, setGameSquers] = useState<any>(initialArr);
-  const [count, setCount] = useState<any>(null);
+  const [count, setCount] = useState<any>(3);
 
   const testCont = gameSquers.filter((elem: any) =>(elem.hidden))
 
@@ -68,6 +71,7 @@ console.log(count);
 
   const squers = gameSquers.map((elem: any) => (
     <Square
+    count={count}
     testCont={testCont}
     setCount={setCount}
       id={elem.id}
@@ -82,7 +86,13 @@ console.log(count);
       <div className="board">
         <div className="squers">{squers}</div>
         <div className="gameInfo">
-          <div>you won!</div>
+
+          
+      {count<3 && (
+                  <div>you won!</div>
+
+      )}
+
           <button>reset</button>
         </div>
       </div>
