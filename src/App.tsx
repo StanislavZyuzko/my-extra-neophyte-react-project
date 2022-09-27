@@ -10,7 +10,7 @@ const initialArr = [
   { id: 6, hidden: true, mined: false },
   { id: 7, hidden: true, mined: false },
   { id: 8, hidden: true, mined: false },
-  { id: 9, hidden: true, mined: true },
+  { id: 9, hidden: true, mined: false },
 ];
 
 interface SquareProps {
@@ -29,18 +29,18 @@ function Square(props: SquareProps) {
   const {
     id,
     isHidden,
+    isMined,
     gameSquers,
     setGameSquers,
     count,
     setCount,
-    setLock,
     lock,
-    isMined,
+    setLock,
   } = props;
 
   const testCount = gameSquers.filter((elem: any) => elem.hidden);
 
-  console.log(count);
+  // console.log(count);
 
   const hiddenHandleClick = (e: any) => {
     setGameSquers((prevState: any) =>
@@ -73,8 +73,22 @@ function App() {
   const [count, setCount] = useState<any>(3);
   const [lock, setLock] = useState<any>(false);
 
+  const randomInteger = (min: any, max: any) => {
+    let rand = min + Math.random() * (max + 1 - min);
+    return Math.floor(rand);
+  };
+
   const resetHandleClick = (e: any) => {
-    setGameSquers(initialArr);
+    let randomId = randomInteger(1, 10);
+    console.log(randomId);
+
+    const randomArr = initialArr.map((elem) => {
+      if (elem.id === randomId) {
+        return { ...elem, mined: true };
+      }
+      return elem;
+    });
+    setGameSquers(randomArr);
     setCount(3);
     setLock(false);
   };
@@ -99,13 +113,10 @@ function App() {
       <div className="board">
         <div className="squers">{squers}</div>
         <div className="gameInfo">
-          {!lock && count < 3 && <div
-          style={{color: "green"}}
-          >you won! 🤗 </div>}
-          {lock && <div
-                    style={{color: "red"}}
-
-          >you lose</div>}
+          {!lock && count < 3 && (
+            <div style={{ color: "green" }}>you won! 🤗 </div>
+          )}
+          {lock && <div style={{ color: "red" }}>you lost!</div>}
           <button onClick={resetHandleClick}>reset</button>
         </div>
       </div>
