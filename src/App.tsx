@@ -19,7 +19,7 @@ function App() {
   const [count, setCount] = useState<number>(3);
   const [lock, setLock] = useState<boolean>(false);
 
-  const randomInteger = (min: any, max: any) => {
+  const randomInteger = (min: number, max: number) => {
     const rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
   };
