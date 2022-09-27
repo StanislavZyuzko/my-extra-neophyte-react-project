@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 const initialArr = [
@@ -10,7 +10,7 @@ const initialArr = [
   { id: 6, hidden: true, mined: false },
   { id: 7, hidden: true, mined: false },
   { id: 8, hidden: true, mined: false },
-  { id: 9, hidden: true, mined: false },
+  { id: 9, hidden: true, mined: true },
 ];
 
 interface SquareProps {
@@ -78,11 +78,22 @@ function App() {
     return Math.floor(rand);
   };
 
-  const resetHandleClick = (e: any) => {
+  const getRandomInitial = () => {
+   
+   
+  };
+  // useEffect(() => {
+  //   getRandomInitial();
+  // }, []);
+
+  const resetHandleClick = (e: any) => {   
+    // getRandomInitial();
     let randomId = randomInteger(1, 10);
     console.log(randomId);
-
     const randomArr = initialArr.map((elem) => {
+      if (elem.mined) {
+        return { ...elem, mined: !elem.mined};
+      }
       if (elem.id === randomId) {
         return { ...elem, mined: true };
       }
