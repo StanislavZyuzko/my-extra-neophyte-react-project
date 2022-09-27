@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import Square from "./components/Square";
 import "./App.css";
 
 const initialArr = [
@@ -13,63 +14,10 @@ const initialArr = [
   { id: 9, hidden: true, mined: true },
 ];
 
-interface SquareProps {
-  id: any;
-  isHidden: any;
-  isMined: any;
-  gameSquers: any;
-  setGameSquers: any;
-  count: any;
-  setCount: any;
-  lock: any;
-  setLock: any;
-}
-
-function Square(props: SquareProps) {
-  const {
-    id,
-    isHidden,
-    isMined,
-    gameSquers,
-    setGameSquers,
-    count,
-    setCount,
-    lock,
-    setLock,
-  } = props;
-
-  const testCount = gameSquers.filter((elem: any) => elem.hidden);
-
-  const hiddenHandleClick = () => {
-    setGameSquers((prevState: any) =>
-      prevState.map((elem: any) => {
-        if (elem.id === id && !elem.mined) {
-          return { ...elem, hidden: false };
-        }
-        if (elem.id === id && elem.mined && count > 2) {
-          setLock(true);
-          return { ...elem, hidden: false };
-        }
-        return elem;
-      })
-    );
-    setCount(testCount.length);
-  };
-
-  return (
-    <div
-      className={isHidden ? "square-hidden" : "square"}
-      onClick={hiddenHandleClick}
-    >
-      {isMined && lock && <span> 💣 </span>}
-    </div>
-  );
-}
-
 function App() {
   const [gameSquers, setGameSquers] = useState<any>(initialArr);
-  const [count, setCount] = useState<any>(3);
-  const [lock, setLock] = useState<any>(false);
+  const [count, setCount] = useState<number>(3);
+  const [lock, setLock] = useState<boolean>(false);
 
   const randomInteger = (min: any, max: any) => {
     let rand = min + Math.random() * (max + 1 - min);
