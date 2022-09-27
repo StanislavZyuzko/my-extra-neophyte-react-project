@@ -1,10 +1,10 @@
+import { useState } from "react";
 import "./App.css";
 
 const testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const initialArr = [
   { id: 1, hidden: true, mined: false },
-
   { id: 2, hidden: true, mined: false },
   { id: 3, hidden: true, mined: false },
   { id: 4, hidden: true, mined: false },
@@ -15,25 +15,48 @@ const initialArr = [
   { id: 9, hidden: true, mined: true },
 ];
 
-console.log(initialArr);
+// console.log(initialArr);
 
 interface SquareProps {
   isHidden: any;
+  setGameSquers: any;
+  id: any;
 }
 
 function Square(props: SquareProps) {
-  const { isHidden } = props;
+  const { isHidden, setGameSquers, id } = props;
+
+  const hiddenHandleClick = (e: any) => {
+    setGameSquers((prevState: any) =>
+      prevState.map((elem: any) => {
+        if (elem.id === id) {
+          return { ...elem, hidden: false };
+        }
+        return elem;
+      })
+    );
+  };
+
   return (
     <div
-      //  className="square"
       className={isHidden ? "square-hidden" : "square"}
+      onClick={hiddenHandleClick}
     ></div>
   );
 }
 
 function App() {
-  const squers = initialArr.map((elem: any) => (
-    <Square key={elem.id} isHidden={elem.hidden} />
+  const [gameSquers, setGameSquers] = useState<any>(initialArr);
+
+  console.log(gameSquers);
+
+  const squers = gameSquers.map((elem: any) => (
+    <Square
+      id={elem.id}
+      setGameSquers={setGameSquers}
+      key={elem.id}
+      isHidden={elem.hidden}
+    />
   ));
 
   return (
