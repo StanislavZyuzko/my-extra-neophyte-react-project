@@ -40,9 +40,7 @@ function Square(props: SquareProps) {
 
   const testCount = gameSquers.filter((elem: any) => elem.hidden);
 
-  // console.log(count);
-
-  const hiddenHandleClick = (e: any) => {
+  const hiddenHandleClick = () => {
     setGameSquers((prevState: any) =>
       prevState.map((elem: any) => {
         if (elem.id === id && !elem.mined) {
@@ -78,21 +76,12 @@ function App() {
     return Math.floor(rand);
   };
 
-  const getRandomInitial = () => {
-   
-   
-  };
-  // useEffect(() => {
-  //   getRandomInitial();
-  // }, []);
-
-  const resetHandleClick = (e: any) => {   
-    // getRandomInitial();
+  const resetHandleClick = () => {
     let randomId = randomInteger(1, 10);
     console.log(randomId);
     const randomArr = initialArr.map((elem) => {
       if (elem.mined) {
-        return { ...elem, mined: !elem.mined};
+        return { ...elem, mined: !elem.mined };
       }
       if (elem.id === randomId) {
         return { ...elem, mined: true };
