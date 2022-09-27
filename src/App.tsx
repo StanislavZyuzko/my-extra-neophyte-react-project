@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./App.css";
 
-const testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const initialArr = [
   { id: 1, hidden: true, mined: false },
@@ -15,37 +14,35 @@ const initialArr = [
   { id: 9, hidden: true, mined: true },
 ];
 
-// let user = initialArr.find(item => item.id == 1);
-// console.log(user);
-
-// console.log(initialArr);
-
 interface SquareProps {
   isHidden: any;
   setGameSquers: any;
   id: any;
   setCount: any;
-  testCont: any;
   count: any;
-  lock: any;
   setLock: any;
+  gameSquers: any;
 }
 
 function Square(props: SquareProps) {
-  const { isHidden, setGameSquers, id, setCount, testCont, count, lock, setLock } = props;
+  const { isHidden, setGameSquers, id, setCount, gameSquers, count, setLock } =
+    props;
+
+  const testCont = gameSquers.filter((elem: any) => elem.hidden);
+
+  console.log(count);
 
   const hiddenHandleClick = (e: any) => {
     e.stopPropagation();
-    // if (!e.target.hidden) {
-    // }
 
     setGameSquers((prevState: any) =>
       prevState.map((elem: any) => {
         if (elem.id === id && !elem.mined) {
           return { ...elem, hidden: false };
         }
-        if (elem.id === id && elem.mined && count>2 ) {
-          setLock(true)          
+        if (elem.id === id && elem.mined && count > 2) {
+          setLock(true);
+          return { ...elem, hidden: false };
         }
         return elem;
       })
@@ -66,26 +63,18 @@ function App() {
   const [count, setCount] = useState<any>(3);
   const [lock, setLock] = useState<any>(false);
 
-
-  const testCont = gameSquers.filter((elem: any) => elem.hidden);
-
-  console.log(count);
-
   const resetHandleClick = (e: any) => {
     setGameSquers(initialArr);
     setCount(3);
     setLock(false);
+  };
 
-  }
-
-  // console.log(gameSquers);
 
   const squers = gameSquers.map((elem: any) => (
     <Square
-    setLock={setLock}
-    lock = {lock}
+      gameSquers={gameSquers}
+      setLock={setLock}
       count={count}
-      testCont={testCont}
       setCount={setCount}
       id={elem.id}
       setGameSquers={setGameSquers}
@@ -102,11 +91,7 @@ function App() {
           {!lock && count < 3 && <div>you won!</div>}
           {lock && <div>you lose!</div>}
 
-
-          <button
-          onClick={resetHandleClick}
-          
-          >reset</button>
+          <button onClick={resetHandleClick}>reset</button>
         </div>
       </div>
     </div>
