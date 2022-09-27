@@ -45,8 +45,7 @@ function Square(props: SquareProps) {
           return { ...elem, hidden: false };
         }
         if (elem.id === id && elem.mined && count>2 ) {
-          setLock(true)
-          
+          setLock(true)          
         }
         return elem;
       })
@@ -72,6 +71,13 @@ function App() {
 
   console.log(count);
 
+  const resetHandleClick = (e: any) => {
+    setGameSquers(initialArr);
+    setCount(3);
+    setLock(false);
+
+  }
+
   // console.log(gameSquers);
 
   const squers = gameSquers.map((elem: any) => (
@@ -94,10 +100,13 @@ function App() {
         <div className="squers">{squers}</div>
         <div className="gameInfo">
           {!lock && count < 3 && <div>you won!</div>}
-          {lock && <div>you loose!</div>}
+          {lock && <div>you lose!</div>}
 
 
-          <button>reset</button>
+          <button
+          onClick={resetHandleClick}
+          
+          >reset</button>
         </div>
       </div>
     </div>
