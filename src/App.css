@@ -23,6 +23,9 @@
   border: 2px solid rgb(173, 179, 189);
   border-radius: 4px;
 }
+.square-hidden{
+    background-color: gray;
+}
 
 .gameInfo {
   display: flex;
