@@ -99,8 +99,13 @@ function App() {
       <div className="board">
         <div className="squers">{squers}</div>
         <div className="gameInfo">
-          {!lock && count < 3 && <div>you won!</div>}
-          {lock && <div>you lose!</div>}
+          {!lock && count < 3 && <div
+          style={{color: "green"}}
+          >you won! 🤗 </div>}
+          {lock && <div
+                    style={{color: "red"}}
+
+          >you lose</div>}
           <button onClick={resetHandleClick}>reset</button>
         </div>
       </div>
