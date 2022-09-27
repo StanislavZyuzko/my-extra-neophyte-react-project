@@ -16,15 +16,17 @@ const initialArr = [
 interface SquareProps {
   id: any;
   isHidden: any;
+  isMined: any;
   gameSquers: any;
   setGameSquers: any;
   count: any;
   setCount: any;
+  lock: any;
   setLock: any;
 }
 
 function Square(props: SquareProps) {
-  const { id, isHidden, gameSquers, setGameSquers, count, setCount, setLock } =
+  const { id, isHidden, gameSquers, setGameSquers, count, setCount, setLock, lock, isMined } =
     props;
 
   const testCount = gameSquers.filter((elem: any) => elem.hidden);
@@ -50,8 +52,13 @@ function Square(props: SquareProps) {
   return (
     <div
       className={isHidden ? "square-hidden" : "square"}
+
       onClick={hiddenHandleClick}
-    ></div>
+    >
+
+{isMined && lock&&( <div>you lose!</div>)}
+
+    </div>
   );
 }
 
@@ -71,10 +78,12 @@ function App() {
       id={elem.id}
       key={elem.id}
       isHidden={elem.hidden}
+      isMined={elem.mined}
       gameSquers={gameSquers}
       setGameSquers={setGameSquers}
       count={count}
       setCount={setCount}
+      lock={lock}
       setLock={setLock}
     />
   ));
