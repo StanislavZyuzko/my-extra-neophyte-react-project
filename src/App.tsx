@@ -27,10 +27,12 @@ interface SquareProps {
   setCount: any;
   testCont: any;
   count: any;
+  lock: any;
+  setLock: any;
 }
 
 function Square(props: SquareProps) {
-  const { isHidden, setGameSquers, id, setCount, testCont  } = props;
+  const { isHidden, setGameSquers, id, setCount, testCont, count, lock, setLock } = props;
 
   const hiddenHandleClick = (e: any) => {
     e.stopPropagation();
@@ -39,16 +41,17 @@ function Square(props: SquareProps) {
 
     setGameSquers((prevState: any) =>
       prevState.map((elem: any) => {
-        if (elem.id === id && !elem.mined) {          
-
+        if (elem.id === id && !elem.mined) {
           return { ...elem, hidden: false };
+        }
+        if (elem.id === id && elem.mined && count>2 ) {
+          setLock(true)
+          
         }
         return elem;
       })
     );
     setCount(testCont.length);
-
-
   };
 
   return (
@@ -62,18 +65,22 @@ function Square(props: SquareProps) {
 function App() {
   const [gameSquers, setGameSquers] = useState<any>(initialArr);
   const [count, setCount] = useState<any>(3);
+  const [lock, setLock] = useState<any>(false);
 
-  const testCont = gameSquers.filter((elem: any) =>(elem.hidden))
 
-console.log(count);
+  const testCont = gameSquers.filter((elem: any) => elem.hidden);
+
+  console.log(count);
 
   // console.log(gameSquers);
 
   const squers = gameSquers.map((elem: any) => (
     <Square
-    count={count}
-    testCont={testCont}
-    setCount={setCount}
+    setLock={setLock}
+    lock = {lock}
+      count={count}
+      testCont={testCont}
+      setCount={setCount}
       id={elem.id}
       setGameSquers={setGameSquers}
       key={elem.id}
@@ -86,12 +93,9 @@ console.log(count);
       <div className="board">
         <div className="squers">{squers}</div>
         <div className="gameInfo">
+          {!lock && count < 3 && <div>you won!</div>}
+          {lock && <div>you loose!</div>}
 
-          
-      {count<3 && (
-                  <div>you won!</div>
-
-      )}
 
           <button>reset</button>
         </div>
