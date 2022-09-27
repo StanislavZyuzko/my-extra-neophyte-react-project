@@ -20,12 +20,12 @@ function App() {
   const [lock, setLock] = useState<boolean>(false);
 
   const randomInteger = (min: any, max: any) => {
-    let rand = min + Math.random() * (max + 1 - min);
+    const rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
   };
 
   const resetHandleClick = () => {
-    let randomId = randomInteger(1, 10);
+    const randomId = randomInteger(1, 9);
     console.log(randomId);
     const randomArr = initialArr.map((elem) => {
       if (elem.mined) {
@@ -65,7 +65,9 @@ function App() {
             <div style={{ color: "green" }}>you won! 🤗 </div>
           )}
           {lock && <div style={{ color: "red" }}>you lost!</div>}
-          <button onClick={resetHandleClick}>reset</button>
+          <button type="button" onClick={resetHandleClick}>
+            reset
+          </button>
         </div>
       </div>
     </div>
