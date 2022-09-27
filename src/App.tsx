@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./App.css";
 
-
 const initialArr = [
   { id: 1, hidden: true, mined: false },
   { id: 2, hidden: true, mined: false },
@@ -15,26 +14,24 @@ const initialArr = [
 ];
 
 interface SquareProps {
-  isHidden: any;
-  setGameSquers: any;
   id: any;
-  setCount: any;
-  count: any;
-  setLock: any;
+  isHidden: any;
   gameSquers: any;
+  setGameSquers: any;
+  count: any;
+  setCount: any;
+  setLock: any;
 }
 
 function Square(props: SquareProps) {
-  const { isHidden, setGameSquers, id, setCount, gameSquers, count, setLock } =
+  const { id, isHidden, gameSquers, setGameSquers, count, setCount, setLock } =
     props;
 
-  const testCont = gameSquers.filter((elem: any) => elem.hidden);
+  const testCount = gameSquers.filter((elem: any) => elem.hidden);
 
   console.log(count);
 
   const hiddenHandleClick = (e: any) => {
-    e.stopPropagation();
-
     setGameSquers((prevState: any) =>
       prevState.map((elem: any) => {
         if (elem.id === id && !elem.mined) {
@@ -47,7 +44,7 @@ function Square(props: SquareProps) {
         return elem;
       })
     );
-    setCount(testCont.length);
+    setCount(testCount.length);
   };
 
   return (
@@ -69,17 +66,16 @@ function App() {
     setLock(false);
   };
 
-
   const squers = gameSquers.map((elem: any) => (
     <Square
-      gameSquers={gameSquers}
-      setLock={setLock}
-      count={count}
-      setCount={setCount}
       id={elem.id}
-      setGameSquers={setGameSquers}
       key={elem.id}
       isHidden={elem.hidden}
+      gameSquers={gameSquers}
+      setGameSquers={setGameSquers}
+      count={count}
+      setCount={setCount}
+      setLock={setLock}
     />
   ));
 
@@ -90,7 +86,6 @@ function App() {
         <div className="gameInfo">
           {!lock && count < 3 && <div>you won!</div>}
           {lock && <div>you lose!</div>}
-
           <button onClick={resetHandleClick}>reset</button>
         </div>
       </div>
