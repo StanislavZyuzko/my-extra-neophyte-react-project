@@ -1,0 +1,39 @@
+.board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* width: 50px; */
+  /* height: 250px; */
+}
+
+.squers {
+  display: grid;
+  grid-template-columns: repeat(3, 30px);
+  grid-template-rows: repeat(3, 30px);
+  grid-gap: 5px 5px;
+  border: 2px solid rgb(173, 179, 189);
+  border-radius: 4px;
+  padding: 15px;
+  margin-top: 25px;
+}
+
+.square {
+  text-align: center;
+  border: 2px solid rgb(173, 179, 189);
+  border-radius: 4px;
+}
+
+.gameInfo {
+  display: flex;
+  padding-top: 8px;
+  justify-content: space-between;
+}
+
+.gameInfo div:first-child {
+    /* color: lime;
+  background-color: black; */
+  padding: 5px;
+}
+
+
