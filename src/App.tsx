@@ -47,7 +47,7 @@ function App() {
     getRandomArr();
   };
 
-  const hiddenHandleClick = (id: any) => {
+  const squareHandleClick = (id: any) => {
     setGameSquers((prevState: any) =>
       prevState.map((elem: any) => {
         if (elem.id === id) {
@@ -61,7 +61,7 @@ function App() {
 
   const squers = gameSquers.map((elem: any) => (
     <Square
-      hiddenHandleClick={hiddenHandleClick}
+      squareHandleClick={squareHandleClick}
       id={elem.id}
       key={elem.id}
       isHidden={elem.hidden}
