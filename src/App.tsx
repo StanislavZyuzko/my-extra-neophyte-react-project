@@ -88,7 +88,7 @@ function App() {
           {lose && <div className="loseInfo">you lost!</div>}
           <button
             type="button"
-            disabled={!resetAktive}
+            disabled={!resetAсtive}
             onClick={resetHandleClick}
           >
             reset
