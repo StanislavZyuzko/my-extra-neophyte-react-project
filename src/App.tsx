@@ -72,6 +72,7 @@ function App() {
 
   const win = !lock && testCount < 2;
   const lose = lock;
+  const resetAktive = win||lose;
 
   return (
     <div className="App">
@@ -84,7 +85,7 @@ function App() {
         <div className="gameInfo">
           {win && <div style={{ color: "green" }}>you won! 🤗 </div>}
           {lose && <div style={{ color: "red" }}>you lost!</div>}
-          <button type="button" onClick={resetHandleClick}>
+          <button type="button" disabled={!resetAktive} onClick={resetHandleClick}>
             reset
           </button>
         </div>
