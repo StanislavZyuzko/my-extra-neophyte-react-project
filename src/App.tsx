@@ -19,6 +19,9 @@ function App() {
   const [count, setCount] = useState<number>(3);
   const [lock, setLock] = useState<boolean>(false);
 
+  const testCount = gameSquers.filter((elem: any) => elem.hidden).length;
+
+
   const randomInteger = (min: number, max: number) => {
     const rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
@@ -37,12 +40,13 @@ function App() {
       return elem;
     });
     setGameSquers(randomArr);
-    setCount(3);
+    // setCount(3);
     setLock(false);
   };
 
   const squers = gameSquers.map((elem: any) => (
     <Square
+    testCount={testCount}
       id={elem.id}
       key={elem.id}
       isHidden={elem.hidden}
@@ -61,7 +65,7 @@ function App() {
       <div className="board">
         <div className="squers">{squers}</div>
         <div className="gameInfo">
-          {!lock && count < 3 && (
+          {!lock && testCount < 2 && (
             <div style={{ color: "green" }}>you won! 🤗 </div>
           )}
           {lock && <div style={{ color: "red" }}>you lost!</div>}
