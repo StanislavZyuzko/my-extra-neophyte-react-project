@@ -15,8 +15,7 @@ function Square(props: SquareProps) {
     isHidden,
     isMined,
     gameSquers,
-    setGameSquers,
-    
+    setGameSquers,    
     lock,
     setLock,
     testCount,
@@ -24,7 +23,6 @@ function Square(props: SquareProps) {
 
 
   const hiddenHandleClick = () => {
-    console.log(testCount);
     setGameSquers((prevState: any) =>
       prevState.map((elem: any) => {
         if (elem.id === id) {

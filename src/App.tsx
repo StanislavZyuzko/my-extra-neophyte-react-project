@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import Square from "./components/Square";
 import "./App.css";
 
@@ -11,7 +12,7 @@ const initialArr = [
   { id: 6, hidden: true, mined: false },
   { id: 7, hidden: true, mined: false },
   { id: 8, hidden: true, mined: false },
-  { id: 9, hidden: true, mined: true },
+  { id: 9, hidden: true, mined: false },
 ];
 
 function App() {
@@ -26,13 +27,10 @@ function App() {
     return Math.floor(rand);
   };
 
-  const resetHandleClick = () => {
+  const getRandomArr = ()=> {
     const randomId = randomInteger(1, 9);
     console.log(randomId);
-    const randomArr = initialArr.map((elem) => {
-      if (elem.mined) {
-        return { ...elem, mined: !elem.mined };
-      }
+    const randomArr = initialArr.map((elem) => {      
       if (elem.id === randomId) {
         return { ...elem, mined: true };
       }
@@ -40,6 +38,14 @@ function App() {
     });
     setGameSquers(randomArr);
     setLock(false);
+  }  
+  
+  useEffect(() => {
+    getRandomArr();
+  }, []);
+
+  const resetHandleClick = () => {
+   getRandomArr();
   };
 
   const squers = gameSquers.map((elem: any) => (
