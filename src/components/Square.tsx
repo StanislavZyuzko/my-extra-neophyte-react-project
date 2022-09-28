@@ -3,9 +3,7 @@ interface SquareProps {
   isHidden: boolean;
   isMined: boolean;
   gameSquers: any;
-  setGameSquers: any;
-  count: number;
-  setCount: any;
+  setGameSquers: any; 
   lock: boolean;
   setLock: any;
   testCount: any;
@@ -18,8 +16,7 @@ function Square(props: SquareProps) {
     isMined,
     gameSquers,
     setGameSquers,
-    count,
-    setCount,
+    
     lock,
     setLock,
     testCount,
@@ -30,17 +27,13 @@ function Square(props: SquareProps) {
     console.log(testCount);
     setGameSquers((prevState: any) =>
       prevState.map((elem: any) => {
-        if (elem.id === id && !elem.mined) {
+        if (elem.id === id) {
+          setLock(elem.mined && testCount > 2);
           return { ...elem, hidden: false };
-        }
-        if (elem.id === id && elem.mined && testCount > 2) {
-          setLock(true);
-          return { ...elem, hidden: false };
-        }
+        }        
         return elem;
       })
     );
-    // setCount(testCount);
   };
 
   return (

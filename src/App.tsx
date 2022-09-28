@@ -16,7 +16,6 @@ const initialArr = [
 
 function App() {
   const [gameSquers, setGameSquers] = useState<any>(initialArr);
-  const [count, setCount] = useState<number>(3);
   const [lock, setLock] = useState<boolean>(false);
 
   const testCount = gameSquers.filter((elem: any) => elem.hidden).length;
@@ -40,7 +39,6 @@ function App() {
       return elem;
     });
     setGameSquers(randomArr);
-    // setCount(3);
     setLock(false);
   };
 
@@ -52,9 +50,7 @@ function App() {
       isHidden={elem.hidden}
       isMined={elem.mined}
       gameSquers={gameSquers}
-      setGameSquers={setGameSquers}
-      count={count}
-      setCount={setCount}
+      setGameSquers={setGameSquers}     
       lock={lock}
       setLock={setLock}
     />
