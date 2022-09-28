@@ -77,12 +77,12 @@ function App() {
 
   const win = !lock && testCount < 2;
   const lose = lock;
-  const resetAktive = win || lose;
+  const resetAсtive = win || lose;
 
   return (
     <div className="App">
       <div className="board">
-        <div className={resetAktive ? "squers locked" : "squers"}>{squers}</div>
+        <div className={resetAсtive ? "squers locked" : "squers"}>{squers}</div>
         <div className="gameInfo">
           {win && <div className="winInfo">you won! 🤗 </div>}
           {lose && <div className="loseInfo">you lost!</div>}
