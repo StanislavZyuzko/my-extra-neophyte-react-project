@@ -26,10 +26,10 @@ function App() {
     return Math.floor(rand);
   };
 
-  const getRandomArr = ()=> {
+  const getRandomArr = () => {
     const randomId = randomInteger(1, 9);
     console.log(randomId);
-    const randomArr = initialArr.map((elem) => {      
+    const randomArr = initialArr.map((elem) => {
       if (elem.id === randomId) {
         return { ...elem, mined: true };
       }
@@ -37,14 +37,14 @@ function App() {
     });
     setGameSquers(randomArr);
     setLock(false);
-  }  
+  };
 
   useEffect(() => {
     getRandomArr();
   }, []);
 
   const resetHandleClick = () => {
-   getRandomArr();
+    getRandomArr();
   };
 
   const hiddenHandleClick = (id: any) => {
@@ -53,7 +53,7 @@ function App() {
         if (elem.id === id) {
           setLock(elem.mined && testCount > 2);
           return { ...elem, hidden: false };
-        }        
+        }
         return elem;
       })
     );
@@ -61,28 +61,29 @@ function App() {
 
   const squers = gameSquers.map((elem: any) => (
     <Square
-    hiddenHandleClick={hiddenHandleClick}
-    testCount={testCount}
+      hiddenHandleClick={hiddenHandleClick}
       id={elem.id}
       key={elem.id}
       isHidden={elem.hidden}
       isMined={elem.mined}
-      gameSquers={gameSquers}
-      setGameSquers={setGameSquers}     
       lock={lock}
-      setLock={setLock}
     />
   ));
+
+  const win = !lock && testCount < 2;
+  const lose = lock;
 
   return (
     <div className="App">
       <div className="board">
-        <div className="squers">{squers}</div>
+        <div
+          className={(win || lose) ? "squers locked" : "squers"}
+        >
+          {squers}
+        </div>
         <div className="gameInfo">
-          {!lock && testCount < 2 && (
-            <div style={{ color: "green" }}>you won! 🤗 </div>
-          )}
-          {lock && <div style={{ color: "red" }}>you lost!</div>}
+          {win && <div style={{ color: "green" }}>you won! 🤗 </div>}
+          {lose && <div style={{ color: "red" }}>you lost!</div>}
           <button type="button" onClick={resetHandleClick}>
             reset
           </button>

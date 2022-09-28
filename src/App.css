@@ -5,6 +5,7 @@
   flex-direction: column;
   /* width: 50px; */
   /* height: 250px; */
+  /* pointer-events: none; */
 }
 
 .squers {
@@ -16,6 +17,12 @@
   border-radius: 4px;
   padding: 15px;
   margin-top: 25px;
+
+}
+
+.locked {
+  pointer-events: none; 
+
 }
 
 .square {
