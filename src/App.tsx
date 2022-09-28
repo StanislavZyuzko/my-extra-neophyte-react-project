@@ -72,20 +72,20 @@ function App() {
 
   const win = !lock && testCount < 2;
   const lose = lock;
-  const resetAktive = win||lose;
+  const resetAktive = win || lose;
 
   return (
     <div className="App">
       <div className="board">
-        <div
-          className={(win || lose) ? "squers locked" : "squers"}
-        >
-          {squers}
-        </div>
+        <div className={win || lose ? "squers locked" : "squers"}>{squers}</div>
         <div className="gameInfo">
-          {win && <div style={{ color: "green" }}>you won! 🤗 </div>}
-          {lose && <div style={{ color: "red" }}>you lost!</div>}
-          <button type="button" disabled={!resetAktive} onClick={resetHandleClick}>
+          {win && <div className="winInfo">you won! 🤗 </div>}
+          {lose && <div className="loseInfo">you lost!</div>}
+          <button
+            type="button"
+            disabled={!resetAktive}
+            onClick={resetHandleClick}
+          >
             reset
           </button>
         </div>
