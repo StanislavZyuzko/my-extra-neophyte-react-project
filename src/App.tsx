@@ -21,7 +21,6 @@ function App() {
 
   const testCount = gameSquers.filter((elem: any) => elem.hidden).length;
 
-
   const randomInteger = (min: number, max: number) => {
     const rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
@@ -39,7 +38,7 @@ function App() {
     setGameSquers(randomArr);
     setLock(false);
   }  
-  
+
   useEffect(() => {
     getRandomArr();
   }, []);
@@ -48,8 +47,21 @@ function App() {
    getRandomArr();
   };
 
+  const hiddenHandleClick = (id: any) => {
+    setGameSquers((prevState: any) =>
+      prevState.map((elem: any) => {
+        if (elem.id === id) {
+          setLock(elem.mined && testCount > 2);
+          return { ...elem, hidden: false };
+        }        
+        return elem;
+      })
+    );
+  };
+
   const squers = gameSquers.map((elem: any) => (
     <Square
+    hiddenHandleClick={hiddenHandleClick}
     testCount={testCount}
       id={elem.id}
       key={elem.id}

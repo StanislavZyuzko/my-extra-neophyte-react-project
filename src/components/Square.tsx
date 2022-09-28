@@ -7,6 +7,7 @@ interface SquareProps {
   lock: boolean;
   setLock: any;
   testCount: any;
+  hiddenHandleClick: any;
 }
 
 function Square(props: SquareProps) {
@@ -19,25 +20,16 @@ function Square(props: SquareProps) {
     lock,
     setLock,
     testCount,
+    hiddenHandleClick,
   } = props;
 
 
-  const hiddenHandleClick = () => {
-    setGameSquers((prevState: any) =>
-      prevState.map((elem: any) => {
-        if (elem.id === id) {
-          setLock(elem.mined && testCount > 2);
-          return { ...elem, hidden: false };
-        }        
-        return elem;
-      })
-    );
-  };
+  
 
   return (
     <div
       className={isHidden ? "square-hidden" : "square"}
-      onClick={hiddenHandleClick}
+      onClick={()=>hiddenHandleClick(id)}
     >
       {isMined && lock && <span> 💣 </span>}
     </div>
