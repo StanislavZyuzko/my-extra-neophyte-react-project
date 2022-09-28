@@ -3,7 +3,7 @@ interface SquareProps {
   isHidden: boolean;
   isMined: boolean;
   lock: boolean;
-  squareHandleClick: any;
+  squareHandleClick: (id: number) => void;
 }
 
 function Square(props: SquareProps) {
