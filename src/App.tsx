@@ -82,7 +82,7 @@ function App() {
   return (
     <div className="App">
       <div className="board">
-        <div className={win || lose ? "squers locked" : "squers"}>{squers}</div>
+        <div className={resetAktive ? "squers locked" : "squers"}>{squers}</div>
         <div className="gameInfo">
           {win && <div className="winInfo">you won! 🤗 </div>}
           {lose && <div className="loseInfo">you lost!</div>}
